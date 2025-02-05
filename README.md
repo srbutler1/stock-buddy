@@ -29,7 +29,11 @@ A comprehensive technical analysis tool providing advanced market metrics, perfo
 
 ## Quick Start
 
-1. **Clone the repository**
+1. **Fork the repository**
+
+   Go to the repository on GitHub and click the "Fork" button at the top right to create a copy of the repository under your own GitHub account.
+
+2. **Clone your forked repository**
    ```bash
    git clone https://github.com/yourusername/stock-buddy.git
    cd stock-buddy
@@ -95,7 +99,7 @@ stock-buddy/
 ├── LICENSE                 # MIT License
 ├── README.md              # Documentation
 ├── CONTRIBUTING.md        # Contribution guidelines
-└── CODE_OF_CONDUCT.md     # Community guidelines
+
 ```
 
 ## Development
