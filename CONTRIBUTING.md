@@ -1,12 +1,12 @@
-# Contributing to Stock Buddy 🚀
+# Contributing to Stock Market Analysis Platform
 
-Welcome to Stock Buddy! We're excited that you want to help make learning about stocks fun for kids. Here's how you can help!
+Thank you for your interest in contributing to our technical analysis platform. This guide outlines the process for making contributions.
 
-## Getting Started 🌟
+## Development Setup
 
 1. **Fork the Repository**
-   * Click the "Fork" button at the top right of this page
-   * This creates your own copy of Stock Buddy
+   * Fork the repository through GitHub's interface
+   * This creates your personal copy of the project
 
 2. **Clone Your Fork**
    ```bash
@@ -14,67 +14,78 @@ Welcome to Stock Buddy! We're excited that you want to help make learning about 
    cd stock-buddy
    ```
 
-3. **Set Up Your Environment**
+3. **Configure Development Environment**
    ```bash
    python -m venv venv
    source venv/bin/activate  # On Windows, use: venv\Scripts\activate
    pip install -r requirements.txt
    ```
 
-## Making Changes 🛠️
+## Development Guidelines
 
-1. **Create a New Branch**
+1. **Branch Management**
    ```bash
-   git checkout -b your-branch-name
+   git checkout -b feature/your-feature-name
    ```
 
-2. **Code Style Guidelines**
-   * Use clear variable names that kids can understand
-   * Add helpful comments explaining what your code does
-   * Follow PEP 8 style guide for Python code
-   * Keep functions small and focused
-   * Add docstrings to explain what functions do
+2. **Code Standards**
+   * Implement comprehensive error handling
+   * Maintain consistent code documentation
+   * Follow PEP 8 style guidelines
+   * Write unit tests for new features
+   * Optimize for performance where possible
 
-3. **Testing**
-   * Make sure to test your changes
-   * Add new tests if you add new features
-   * All tests should pass before submitting
+3. **Technical Requirements**
+   * Ensure thread safety in data operations
+   * Implement proper exception handling
+   * Maintain type hints and docstrings
+   * Follow SOLID principles
+   * Consider memory optimization
 
-## Submitting Changes 📝
+## Contribution Process
 
-1. **Commit Your Changes**
+1. **Version Control**
    ```bash
    git add .
-   git commit -m "Describe your changes here"
+   git commit -m "feat/fix/docs: descriptive message"
    ```
+   Follow conventional commit standards:
+   * feat: New feature
+   * fix: Bug fix
+   * docs: Documentation changes
+   * refactor: Code refactoring
+   * perf: Performance improvements
+   * test: Adding tests
 
-2. **Push to Your Fork**
+2. **Push Changes**
    ```bash
-   git push origin your-branch-name
+   git push origin feature/your-feature-name
    ```
 
-3. **Create a Pull Request**
-   * Go to the Stock Buddy repository
-   * Click "New Pull Request"
-   * Select your branch
-   * Tell us what you changed and why
+3. **Pull Request Guidelines**
+   * Provide comprehensive description
+   * Include test results
+   * Document performance implications
+   * Reference related issues
+   * Update relevant documentation
 
-## What We're Looking For 🎯
+## Development Focus
 
-* Educational features that make learning about stocks fun
-* Clear explanations in code comments
-* Kid-friendly user interfaces
-* Bug fixes and improvements
-* Documentation updates
+* Technical analysis algorithms
+* Performance optimization
+* Market data processing
+* Statistical analysis features
+* API integration improvements
+* Documentation enhancements
 
-## Need Help? 🤔
+## Technical Support
 
-* Check out our [README.md](README.md)
-* Look at existing [Issues](../../issues)
-* Ask questions in [Discussions](../../discussions)
+* Consult the [README.md](README.md)
+* Review existing [Issues](../../issues)
+* Participate in [Discussions](../../discussions)
 
-## Code of Conduct 🤝
+## Code of Conduct
 
-Please read our [Code of Conduct](CODE_OF_CONDUCT.md). We want Stock Buddy to be a welcoming place for everyone!
+Please review our [Code of Conduct](CODE_OF_CONDUCT.md). We maintain professional standards in all project interactions.
 
-Thank you for helping make Stock Buddy better! 🌟
+Thank you for contributing to the advancement of our market analysis platform.
