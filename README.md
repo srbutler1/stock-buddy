@@ -1,5 +1,7 @@
 # Stock Market Analysis Platform
 
+Arkansas 
+
 A comprehensive technical analysis tool providing advanced market metrics, performance indicators, and investment simulation capabilities.
 
 ![Python Version](https://img.shields.io/badge/python-3.8%2B-blue)
