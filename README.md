@@ -1,21 +1,33 @@
-# Stock Buddy 🤖📈
+# Stock Market Analysis Platform
 
-A fun and educational stock analysis tool designed to help kids learn about the stock market! Stock Buddy makes it easy to explore companies, understand stock prices, and learn about investing in a safe, kid-friendly environment.
+A comprehensive technical analysis tool providing advanced market metrics, performance indicators, and investment simulation capabilities.
 
 ![Python Version](https://img.shields.io/badge/python-3.8%2B-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 [![Code Style](https://img.shields.io/badge/code%20style-black-black)](https://github.com/psf/black)
 
-## Features 🌟
+## Features
 
-- 📊 Real-time stock data visualization
-- 🎯 Kid-friendly explanations of companies and stocks
-- 💰 Investment simulator for practice
-- 📈 Interactive charts and graphs
-- 🎮 Fun facts about companies
-- 🌈 Colorful, easy-to-understand interface
+- Advanced Technical Analysis
+  - Moving Averages (20-day and 50-day SMA)
+  - RSI (Relative Strength Index)
+  - MACD (Moving Average Convergence Divergence)
+  - Volume Analysis with Average Comparison
+  - Volatility Metrics
+- Professional-Grade Charts
+  - Candlestick Patterns
+  - Technical Indicators Overlay
+  - Interactive Price Analysis
+- Investment Performance Metrics
+  - ROI and Annualized Returns
+  - Sharpe Ratio Analysis
+  - Risk-Adjusted Performance Metrics
+- Comprehensive Market Data
+  - Real-Time Stock Information
+  - Company Fundamentals
+  - Historical Price Analysis
 
-## Quick Start 🚀
+## Quick Start
 
 1. **Clone the repository**
    ```bash
@@ -30,56 +42,63 @@ A fun and educational stock analysis tool designed to help kids learn about the 
    pip install -r requirements.txt
    ```
 
-3. **Run Stock Buddy**
+3. **Launch the application**
    ```bash
    cd src/stock_buddy
    streamlit run app.py
    ```
 
-4. **Open your browser**
-   - Stock Buddy will automatically open in your default web browser
-   - If it doesn't, visit: http://localhost:8501
+4. **Access the platform**
+   - Application will be available at: http://localhost:8501
 
-## How to Use Stock Buddy 🎮
+## Technical Analysis Tools
 
-1. **Enter a Stock Symbol**
-   - Type in a stock symbol (like AAPL for Apple)
-   - Don't know any symbols? Try these:
-     - AAPL (Apple)
-     - MSFT (Microsoft)
-     - GOOGL (Google)
-     - DIS (Disney)
+### Price Analysis
+- Candlestick charts for price action analysis
+- Multiple timeframe analysis (7-365 days)
+- Moving averages for trend identification
+- Volume analysis for trade activity
 
-2. **Explore the Company**
-   - Learn what the company does
-   - See important facts and numbers
-   - Watch how the stock price changes
+### Technical Indicators
+- **RSI (Relative Strength Index)**
+  - Momentum indicator (0-100 scale)
+  - Overbought/Oversold identification
+  - Divergence analysis capabilities
 
-3. **Try the Investment Simulator**
-   - Practice investing with pretend money
-   - Learn about profits and losses
-   - Get friendly tips about investing
+- **MACD (Moving Average Convergence Divergence)**
+  - Trend-following momentum indicator
+  - Signal line crossovers
+  - Histogram analysis
 
-## For Parents and Teachers 👨‍👩‍👧‍👦
+- **Moving Averages**
+  - 20-day SMA for short-term trends
+  - 50-day SMA for medium-term trends
+  - Crossover analysis
 
-Stock Buddy is designed to be:
-- 🔒 Safe and educational
-- 📚 Easy to understand
-- 🎯 Focused on learning
-- 💡 Encouraging responsible habits
-- 🌟 Fun and engaging
+### Performance Metrics
+- ROI (Return on Investment)
+- Annualized Returns
+- Volatility Analysis
+- Sharpe Ratio Calculations
 
-## Contributing 🤝
+## Project Structure
 
-We love help from the community! Want to make Stock Buddy better?
+```
+stock-buddy/
+├── src/
+│   └── stock_buddy/
+│       ├── app.py           # Streamlit web application
+│       └── stock_analyzer.py # Technical analysis engine
+├── tests/                   # Test suite
+├── sample_data/            # Sample datasets
+├── requirements.txt        # Dependencies
+├── LICENSE                 # MIT License
+├── README.md              # Documentation
+├── CONTRIBUTING.md        # Contribution guidelines
+└── CODE_OF_CONDUCT.md     # Community guidelines
+```
 
-1. Read our [Contributing Guidelines](CONTRIBUTING.md)
-2. Check out our [Code of Conduct](CODE_OF_CONDUCT.md)
-3. Fork the repository
-4. Make your changes
-5. Submit a pull request
-
-## Development Setup 🛠️
+## Development
 
 1. **Install dependencies**
    ```bash
@@ -97,37 +116,28 @@ We love help from the community! Want to make Stock Buddy better?
    flake8
    ```
 
-## Project Structure 📁
+## Contributing
 
-```
-stock-buddy/
-├── src/
-│   └── stock_buddy/
-│       ├── app.py           # Main Streamlit web application
-│       └── stock_analyzer.py # Core analysis functionality
-├── tests/                   # Test files
-├── sample_data/            # Example data files
-├── requirements.txt        # Project dependencies
-├── LICENSE                 # MIT License
-├── README.md              # This file
-├── CONTRIBUTING.md        # Contribution guidelines
-└── CODE_OF_CONDUCT.md     # Community guidelines
-```
+1. Review the [Contributing Guidelines](CONTRIBUTING.md)
+2. Fork the repository
+3. Create a feature branch
+4. Implement your changes
+5. Submit a pull request
 
-## License 📜
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Acknowledgments 🙏
+## Technology Stack
 
 - Built with [Streamlit](https://streamlit.io/)
-- Stock data from [Yahoo Finance](https://finance.yahoo.com/)
-- Charts powered by [Plotly](https://plotly.com/)
+- Market data from [Yahoo Finance](https://finance.yahoo.com/)
+- Visualization powered by [Plotly](https://plotly.com/)
 
-## Safety Note 🔒
+## Disclaimer
 
-Stock Buddy is for educational purposes only. Always consult with parents/guardians and financial advisors before making real investments.
+This platform is for educational and research purposes only. The technical analysis and investment simulations provided should not be considered as financial advice. Always conduct thorough research and consult with financial professionals before making investment decisions.
 
 ---
 
-Made with ❤️ for young learners everywhere!
+Developed for technical analysis and market research

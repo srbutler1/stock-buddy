@@ -1,6 +1,6 @@
 """
-Stock Buddy - A fun way to learn about stocks! 📈
-This module helps kids understand stock market basics through simple analysis.
+Stock Analysis Tool
+A comprehensive stock market analysis tool providing technical indicators and financial metrics.
 """
 
 import yfinance as yf
@@ -9,7 +9,7 @@ import plotly.graph_objects as go
 from datetime import datetime, timedelta
 
 class StockBuddy:
-    """Your friendly stock market guide! 🤖"""
+    """Stock analysis tool providing technical indicators and market metrics"""
     
     def __init__(self):
         """Get ready to explore stocks!"""
@@ -61,90 +61,140 @@ class StockBuddy:
             progress=False
         )
     
-    def calculate_fun_facts(self) -> dict:
-        """Calculate interesting facts about the stock! 🎯"""
+    def calculate_metrics(self) -> dict:
+        """Calculate key technical indicators and market metrics"""
         if self.stock_data is None or self.stock_data.empty:
             raise ValueError("No stock data available! Use get_stock_history() first!")
         
-        highest_price = self.stock_data['High'].max()
-        lowest_price = self.stock_data['Low'].min()
-        current_price = self.stock_data['Close'][-1]
-        
-        # Calculate if the stock is going up or down (trend)
-        start_price = self.stock_data['Close'][0]
+        if self.stock_data is None or self.stock_data.empty:
+            raise ValueError("No stock data available! Use get_stock_history() first!")
+
+        # Calculate basic price metrics
+        current_price = self.stock_data['Close'].iloc[-1]
+        start_price = self.stock_data['Close'].iloc[0]
         price_change = ((current_price - start_price) / start_price) * 100
         
+        # Calculate Moving Averages
+        self.stock_data['SMA_20'] = self.stock_data['Close'].rolling(window=20).mean()
+        self.stock_data['SMA_50'] = self.stock_data['Close'].rolling(window=50).mean()
+        
+        # Calculate RSI (Relative Strength Index)
+        delta = self.stock_data['Close'].diff()
+        gain = (delta.where(delta > 0, 0)).rolling(window=14).mean()
+        loss = (-delta.where(delta < 0, 0)).rolling(window=14).mean()
+        rs = gain / loss
+        rsi = 100 - (100 / (1 + rs))
+        
+        # Calculate Volatility (20-day standard deviation)
+        volatility = self.stock_data['Close'].rolling(window=20).std()
+        
+        # Calculate MACD
+        exp1 = self.stock_data['Close'].ewm(span=12, adjust=False).mean()
+        exp2 = self.stock_data['Close'].ewm(span=26, adjust=False).mean()
+        macd = exp1 - exp2
+        signal = macd.ewm(span=9, adjust=False).mean()
+        
         return {
-            "highest_price": round(highest_price, 2),
-            "lowest_price": round(lowest_price, 2),
             "current_price": round(current_price, 2),
             "price_change_percent": round(price_change, 2),
-            "is_going_up": price_change > 0,
-            "total_days_analyzed": len(self.stock_data)
+            "sma_20": round(self.stock_data['SMA_20'].iloc[-1], 2),
+            "sma_50": round(self.stock_data['SMA_50'].iloc[-1], 2),
+            "rsi": round(rsi.iloc[-1], 2),
+            "volatility": round(volatility.iloc[-1], 2),
+            "macd": round(macd.iloc[-1], 2),
+            "macd_signal": round(signal.iloc[-1], 2),
+            "volume": int(self.stock_data['Volume'].iloc[-1]),
+            "avg_volume": int(self.stock_data['Volume'].mean()),
+            "total_days": len(self.stock_data)
         }
     
-    def create_fun_chart(self) -> go.Figure:
-        """Create a colorful, easy-to-understand chart! 📊"""
+    def create_technical_chart(self) -> go.Figure:
+        """Create a technical analysis chart with multiple indicators"""
         if self.stock_data is None or self.stock_data.empty:
             raise ValueError("No stock data available! Use get_stock_history() first!")
         
         fig = go.Figure()
         
-        # Add the main price line
+        # Calculate indicators if not already calculated
+        if 'SMA_20' not in self.stock_data.columns:
+            self.calculate_metrics()
+
+        # Create subplots for price and volume
+        fig = go.Figure()
+
+        # Add candlestick chart
+        fig.add_trace(go.Candlestick(
+            x=self.stock_data.index,
+            open=self.stock_data['Open'],
+            high=self.stock_data['High'],
+            low=self.stock_data['Low'],
+            close=self.stock_data['Close'],
+            name='OHLC'
+        ))
+
+        # Add Moving Averages
         fig.add_trace(go.Scatter(
             x=self.stock_data.index,
-            y=self.stock_data['Close'],
-            name='Stock Price',
-            line=dict(color='blue', width=3),
-            mode='lines'
+            y=self.stock_data['SMA_20'],
+            name='20-day SMA',
+            line=dict(color='blue', width=1)
         ))
-        
-        # Make the chart kid-friendly
+
+        fig.add_trace(go.Scatter(
+            x=self.stock_data.index,
+            y=self.stock_data['SMA_50'],
+            name='50-day SMA',
+            line=dict(color='orange', width=1)
+        ))
+
+        # Update layout
         fig.update_layout(
-            title=f"{self.symbol} Stock Price Adventure! 🚀",
-            xaxis_title="Date 📅",
-            yaxis_title="Price 💰",
-            template="simple_white",
+            title=f"{self.symbol} Technical Analysis",
+            xaxis_title="Date",
+            yaxis_title="Price",
+            template="plotly_white",
             showlegend=True,
-            hovermode='x unified'
+            hovermode='x unified',
+            xaxis_rangeslider_visible=False
         )
         
         return fig
     
-    def get_investment_lesson(self, amount: float) -> dict:
+    def simulate_investment(self, amount: float) -> dict:
         """
-        Learn what would happen if you invested some money!
+        Simulate an investment with detailed performance metrics
         
         Args:
-            amount: How much money you want to pretend to invest
+            amount: Initial investment amount
             
         Returns:
-            A fun lesson about investing that amount
+            Dictionary containing investment performance metrics
         """
         if self.stock_data is None or self.stock_data.empty:
             raise ValueError("No stock data available! Use get_stock_history() first!")
         
-        start_price = self.stock_data['Close'][0]
-        end_price = self.stock_data['Close'][-1]
+        start_price = self.stock_data['Close'].iloc[0]
+        end_price = self.stock_data['Close'].iloc[-1]
         
         shares = amount / start_price
         end_value = shares * end_price
         profit_loss = end_value - amount
         
+        # Calculate returns and metrics
+        roi = (profit_loss / amount) * 100
+        daily_returns = self.stock_data['Close'].pct_change()
+        annualized_return = ((1 + (profit_loss / amount)) ** (365 / len(self.stock_data)) - 1) * 100
+        volatility = daily_returns.std() * (252 ** 0.5) * 100  # Annualized volatility
+        sharpe_ratio = (annualized_return - 2) / volatility  # Assuming 2% risk-free rate
+        
         return {
-            "shares_you_could_buy": round(shares, 2),
-            "starting_investment": round(amount, 2),
-            "ending_value": round(end_value, 2),
-            "profit_or_loss": round(profit_loss, 2),
-            "was_it_good": profit_loss > 0,
-            "lesson": self._get_lesson_message(profit_loss)
+            "shares": round(shares, 4),
+            "initial_investment": round(amount, 2),
+            "final_value": round(end_value, 2),
+            "absolute_return": round(profit_loss, 2),
+            "roi_percent": round(roi, 2),
+            "annualized_return": round(annualized_return, 2),
+            "volatility": round(volatility, 2),
+            "sharpe_ratio": round(sharpe_ratio, 2),
+            "holding_period_days": len(self.stock_data)
         }
-    
-    def _get_lesson_message(self, profit_loss: float) -> str:
-        """Create a friendly message about the investment result."""
-        if profit_loss > 0:
-            return ("Great job! You made money! Remember, stocks can go up and down, "
-                   "so it's important to invest wisely and for the long term! 🌟")
-        else:
-            return ("Don't worry! Sometimes stocks go down. That's why it's important "
-                   "to learn and understand before investing real money! 📚")
